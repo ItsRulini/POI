@@ -37,6 +37,7 @@
         String registro = request.getSession().getAttribute("Registro").toString();
         String biografia = request.getSession().getAttribute("Descripcion") != null ? request.getSession().getAttribute("Descripcion").toString() : "";
         String pass = request.getSession().getAttribute("Contraseña").toString();
+        String avatar = request.getSession().getAttribute("Avatar").toString();
     %>
     
 
@@ -44,7 +45,7 @@
         <div class="profile-container-general">
             <div class="profile-img-user">
                 <div class="profile-pfp">
-                    <img class="Pfp" alt="ChiChat" src="logo.jpg">
+                    <img class="Pfp" alt="ChiChat" src="<%=avatar%>">
                 </div>
                 <div class="profile-user-bio">
                     <input type="text" name="" id="" value="<%=usuario%>" placeholder="Username" class="profile-p">

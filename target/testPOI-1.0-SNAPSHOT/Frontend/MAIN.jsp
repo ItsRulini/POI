@@ -29,13 +29,7 @@
     
     <%
         String usuario = request.getSession().getAttribute("Usuario").toString();
-        String nombre = request.getSession().getAttribute("Nombres").toString();
-        String paterno = request.getSession().getAttribute("Paterno").toString();
-        String materno = request.getSession().getAttribute("Materno").toString();
-        String email = request.getSession().getAttribute("Email").toString();
-        String nacimiento = request.getSession().getAttribute("Nacimiento").toString();
-        String registro = request.getSession().getAttribute("Registro").toString();
-        //String descripcion = request.getSession().getAttribute("Descripcion").toString();
+        String avatar = request.getSession().getAttribute("Avatar").toString();
     %>
     
     
@@ -47,7 +41,7 @@
             <!-- nos ayuda a solo centrar el usuario (su foto) -->
             <div class="user-container">
                 <div class="user-photo">
-                    <img class="user-img" alt="ChiChat" src="logo.jpg">
+                    <img class="user-img" alt="ChiChat" src="<%=avatar%>">
                     <p><%=usuario%></p>
                 </div>
             </div>

@@ -96,6 +96,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("Registro", user.getFechaRegistro());
                 session.setAttribute("Descripcion", user.getDescripcion());
                 session.setAttribute("Contraseña", user.getContraseña());
+                session.setAttribute("Avatar", user.getAvatar());
 
                 //Metodo para redireccionar a otra vista/Servlet
                 response.sendRedirect("Frontend/MAIN.jsp");
