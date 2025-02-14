@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+body{
+    background-color: rgb(255, 247, 237);
+    background-image: url('fondo2.png'); /*fondo a usar para la página*/
+
+    background-size: cover;  /*cubre todo*/
+    background-position: center; 
+    background-repeat: no-repeat; 
+
+    height: 100vh; /* ocupa todo el tamaño de la pagina */
+}
+li, a, button{
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+.logo{
+    cursor: pointer; 
+}
+.Logo{
+    width: 70px;
+}
+
+.navlinks{
+    list-style: none;
+}
+.navlinks li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+.navlinks li a{
+    background-color: rgb(139, 98, 71);;
+    color: rgb(255, 247, 237);
+    display: block;
+    margin: 0px 2px;
+    padding: 12px 22px;
+    border-radius: 50px;
+    transition:  all 0.3s ease 0s;
+}
+.navlinks li a:hover{
+    background-color: rgb(255, 247, 237);
+    color: rgb(139, 98, 71);
+}
+.btn-profile{
+    width: 300px;
+    padding: 12px 25px;
+    background-color: rgb(139, 98, 71);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    color: rgb(255, 247, 237);
+
+}
+.btn-profile:hover{
+    background-color: rgb(255, 247, 237);
+    color: rgb(139, 98, 71);
+}
+/*      VENTANAS DE CHAT        */
+.container-interface{
+    display: flex;
+    justify-content: center; /* centra horizontalmente los elementos */
+    align-items: center; /* centra verticalmente los elementos */
+    width: 100vw; 
+    height: 80vh;
+    background-color: transparent; /*aqua*/
+
+}
+.container-interface .sidebar,
+.container-interface .chat-container,
+.container-interface .additional-container {
+    height: 100%;
+    border-radius: 30px;
+
+    box-shadow: 2px 9px 49px 5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+}
+
+.container-interface .sidebar{
+    background-color: transparent; /*amarillo*/
+    width: 295px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+.container-interface .chat-container{
+    background-color: transparent; /*rojo*/
+    width: 850px;
+    margin-right: 50px;
+
+}
+.container-interface .additional-container{
+    background-color: transparent; /*azul*/
+    width: 350px;
+    margin-right: 50px;
+
+}
+
+/*containers de auxilio :'0*/
+.sidebar .user-container,
+.sidebar .separador-container,
+.sidebar .elements-container,
+.chats-display .chats-active{
+    display: flex; /* Para centrar su contenido e */
+    justify-content: center; 
+    align-items: center;
+    background-color: transparent; /*amarillo*/
+}
+.sidebar .user-container {
+    height: 40%;
+    width: 100%;
+}
+.user-container .user-photo {
+    display: flex; /* Para centrar su contenido */
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    
+    background-color: transparent; /*naranja*/
+    border-radius: 30px;
+    
+    height: 100%;
+    width: 100%;
+}
+.user-photo .user-img{
+    height: 80%;
+    width: 80%;
+    border-radius: 100%;
+    margin: 8px;
+}
+.user-photo p{
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(228, 190, 165);
+}
+/*separadores containers*/
+.sidebar .separador-container,
+.sidebar .elements-container{
+    height: 5%;
+    width: 100%;
+}
+.elements-container .elements-aux {
+    height: 100%;
+    width: 85%;
+    background-color: transparent;
+    color: rgb(228, 190, 165);
+    display: flex;  /* Alinear elementos en fila */
+    align-items: center;
+    justify-content: space-between; /* Separa los extremos */
+    
+}
+.elements-aux .icons-group {
+    justify-content: center; 
+    align-items: center;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    
+    
+}
+.icons-group i{
+    border-radius: 15px;
+    padding: 12px;
+}
+.icons-group i:hover{
+    background-color: rgb(228, 190, 165);
+    color: rgb(255, 247, 237);
+    transition:  all 0.3s ease 0s;
+}
+
+.elements-aux p {
+    text-align: right; /* Asegura que el texto esté alineado a la derecha */
+}
+
+.separador-container .h{
+    border: none;
+    background-color: rgb(228, 190, 165);
+    height: 3px;
+    width: 85%;
+}
+/*container de todas las conversaciones*/
+.sidebar .chats-display{
+    background-color: transparent; /*rojo*/
+    overflow-y: auto; /*para que podamos hacer scroll con los chats*/
+    height: 50%;
+    width: 100%;
+    gap: 10px;
+}
+
+.chats-display .chats-active{
+    background-color: transparent; /*transparente*/
+    height: 20%;
+    width: 100%;
+    
+}
+.chats-active:hover{
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    transition:  all 0.3s ease 0s;
+}
+.chats-active .user-display-photo{
+    background-color: transparent; /*brown*/
+    display: flex;
+    justify-content: center; /* centra horizontalmente los elementos */
+    align-items: center;
+
+    height: 100%;
+    width: 25%;
+}
+.user-display-photo .Pic{
+    height: 76%;
+    width: 76%;
+    border-radius: 100%;
+}
+.chats-active .user-convo{
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+
+    background-color: transparent; /*aquamarine*/
+    color: rgb(228, 190, 165);;
+
+    height: 100%;
+    width: 75%;
+    gap: 5px;
+    padding-left: 5px;
+}
+.user-convo .username{
+    font-weight: bold;
+}
+.user-convo .conversation{
+    font-size: small;
+}
+/*color del scrollbar del primer container*/
+.chats-display{
+    scrollbar-color: #e4d0c3 #ffffff; /* Color del thumb y track */
+    scrollbar-width: thin; /* Grosor del scrollbar */
+    
+}
+/*      ///////////////////////////     */
+.chat-container .chat-display-top,
+.chat-container .separador-aux,
+.chat-container .window-chat,
+.chat-container .bar-chat,
+.bar-chat .write-bar{
+    display: flex; /* Para centrar su contenido e */
+    align-items: center;
+    justify-content: center;
+    
+    background-color: transparent; /*pink*/
+    color: rgb(228, 190, 165);;
+}
+.chat-container .chat-display-top {
+    height: 12%;
+    width: 100%;
+}
+.chat-display-top .display-top-aux,
+.chat-display-top .display-icons-group{
+    align-items: center;
+    display: flex;
+
+    height: 100%;
+}
+.chat-display-top .display-top-aux{
+    padding-left: 5%;
+    width: 80%;
+    background-color: transparent; /*verde*/
+
+    font-weight: bold;
+    font-size: 25px;
+}
+.chat-display-top .display-icons-group{
+    width: 20%;
+    background-color: transparent; /*verde*/
+    padding-right: 5%;
+    gap: 20px;
+}
+.display-icons-group i{
+    border-radius: 15px;
+    padding: 15px;
+}
+.display-icons-group i:hover{
+    color: rgb(255, 247, 237);
+    background-color: rgb(228, 190, 165);
+    transition:  all 0.3s ease 0s;
+}   
+.chat-container .separador-aux{
+    height: 0.25%;
+    width: 100%;
+    background-color: transparent;
+}
+.separador-aux .h-display{
+    border: none;
+    background-color: rgb(228, 190, 165);
+    height: 100%;
+    width: 90%;
+}
+.chat-container .window-chat{
+    overflow-y: auto;
+
+    background-color: transparent; /*verde*/
+    width: 100%;
+    height: 75%;
+}
+.chat-container .bar-chat{
+    background-color: transparent; /*verde claro*/
+    width: 100%;
+    height: 13.25%;
+}
+.bar-chat .write-bar{
+    height: 60%;
+    width: 95%;
+    background-color: rgb(255, 255, 255); /*beige*/
+
+    border-radius: 12px;
+}
+.write-bar input{
+    height: 100%;
+    width: 92%;
+
+    border: none;
+    outline: none;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: transparent;   /*rosa*/
+    color: rgb(228, 190, 165);;
+}
+.write-bar input::placeholder{
+    color: rgb(228, 190, 165);;
+}
+.write-bar .btn-post{
+    height: 75%;
+    width: 5.5%;
+    border: none;
+    background-color: rgb(228, 190, 165);;
+    color: rgb(255, 247, 237);
+    border-radius: 10px;
+}
+.btn-post:hover{
+    transition:  all 0.3s ease 0s;
+    background-color: rgb(255, 247, 237);
+    color: rgb(228, 190, 165);;
+}
