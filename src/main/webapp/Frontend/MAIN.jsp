@@ -20,7 +20,7 @@
         <nav>
             <ul class="navlinks">
                 <li><a href="MAIN.jsp">Chats</a></li>
-                <li><a href="#">Rewards</a></li>
+                <li><a href="#" id="Crear">Tasks</a></li>
                 <li><a href="LOGIN.jsp">Log out</a></li>
             </ul>
         </nav>
@@ -29,7 +29,7 @@
     
     <%
         String usuario = request.getSession().getAttribute("Usuario").toString();
-        String avatar = request.getSession().getAttribute("Avatar").toString();
+        String avatar = request.getSession().getAttribute("Avatar") == null ? "" : request.getSession().getAttribute("Avatar").toString();
     %>
     
     
@@ -89,22 +89,93 @@
                 <hr class="h-display">
             </div>
             <div class="window-chat">
-
+                <div class="window-bubble">
+                    <img class="BubblePic" alt="ChiChat" src="logo.jpg">
+                    <textarea type="text" placeholder="Este es mi primer mensaje"></textarea>
+                </div>
+                <div class="window-bubble-dos">
+                    <textarea type="text" placeholder="Este es mi primer mensaje"></textarea>
+                    <img class="BubblePicDos" alt="ChiChat" src="<%=avatar%>">
+                </div>
             </div>
             <!-- barra para escribir -->
             <div class="bar-chat">
                 <div class="write-bar">
                     <input type="text" name="" placeholder="What's on your mind?">
+                    <button type="submit" class="btn-post-media"><i class="fa-solid fa-paperclip"></i></button>
+                    <button type="submit" class="btn-post-location"><i class="fa-solid fa-location-dot"></i></button>
                     <button type="submit" class="btn-post"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
         </div>
         <!-- 3. -->
-        <!-- ventana auviliar? -->
+        <!-- ventana de premios -->
         <div class="additional-container">
-    
+            <div class="additional-container-n">
+                <h1>Rewards</h1>
+                <div class="separador-h1">
+                    <hr class="h-h1">
+                </div>
+                <!-- burbuja de recompensas (lo puse de notificaciones pq si era para notificaciones, pero asi lo dejo ya xd)-->
+                <div class="notificacion-container">
+                    <div class="notificacion-bubble">
+                        <p id="CrearReward">Claim your reward</p>
+                    </div>
+                </div>
+            </div>
+            <div class="additional-container-p">
+                <h1>Task Progress</h1>
+                <div class="separador-h2">
+                    <hr class="h-h2">
+                </div>
+                <!-- progreso de las tareas -->
+                <div class="task-container">
+                    <div class="task-progress">
+                        <p> [Task name] progress...</p>
+                        <div class="bar-progress">
+                            <div class="bar-progress-progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Ventana PopUp para crear las tareas -->
+    <div class="PopUp"> <!-- fondo -->
+        <div class="modal-content"> <!-- Ventana base -->
+            <button class="close"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="task-info">
+                <h4>Create a new task</h4>
+                <div class="separador-h4">
+                    <hr class="h-h4">
+                </div>
+                <textarea name="description-task" id="task" placeholder="Task description..."></textarea>
+                <div class="task-check">
+                    <h3>Select the reward</h3>
+                    <p><input type="checkbox" name="section" value="sports">#1 Reward</p>
+                    <p><input type="checkbox" name="section" value="business">#2 Reward</p>
+                </div>
+                <button type="submit" class="task-btn">Create task</button>
+            </div>
         </div>
     </div>
+    <!-- Ventana PopUp para reclamar recompensas -->
+    <div class="PopUpReward"> <!-- fondo -->
+        <div class="modal-reward"> <!-- Ventana base -->
+            <button class="close-reward"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="task-reward">
+                <div class="separador-reward">
+                    <hr class="h-reward">
+                </div>
+                <h3>Select your reward</h3>
+                <p><input type="checkbox" name="section" value="sports">#1 Reward</p>
+                <p><input type="checkbox" name="section" value="business">#2 Reward</p>
+                <button type="submit" class="task-reward-btn">Claim</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="MAIN.js"></script>
     
 </body>
 </html>

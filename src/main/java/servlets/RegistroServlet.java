@@ -113,7 +113,7 @@ public class RegistroServlet extends HttpServlet {
                 }
 
                 filePart.write(uploadPath + fileName);
-                avatarPath = "Frontend\\Avatar perfil\\" + fileName;
+                avatarPath = "Avatar perfil\\" + fileName; 
             }
 
             // Convertir String a java.sql.Date

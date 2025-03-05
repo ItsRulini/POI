@@ -83,13 +83,16 @@ header{
 
 }
 .container-interface .sidebar,
-.container-interface .chat-container,
-.container-interface .additional-container {
+.container-interface .chat-container{
     height: 100%;
     border-radius: 30px;
 
     box-shadow: 2px 9px 49px 5px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(20px);
+}
+.container-interface .additional-container {
+    height: 100%;
+    border-radius: 30px;
 }
 
 .container-interface .sidebar{
@@ -109,7 +112,12 @@ header{
     background-color: transparent; /*azul*/
     width: 350px;
     margin-right: 50px;
-
+    
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+    /*padding: 5px;*/
 }
 
 /*containers de auxilio :'0*/
@@ -182,6 +190,7 @@ header{
     background-color: rgb(228, 190, 165);
     color: rgb(255, 247, 237);
     transition:  all 0.3s ease 0s;
+    cursor: pointer; 
 }
 
 .elements-aux p {
@@ -213,6 +222,7 @@ header{
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     transition:  all 0.3s ease 0s;
+    cursor: pointer; 
 }
 .chats-active .user-display-photo{
     background-color: transparent; /*brown*/
@@ -256,7 +266,6 @@ header{
 /*      ///////////////////////////     */
 .chat-container .chat-display-top,
 .chat-container .separador-aux,
-.chat-container .window-chat,
 .chat-container .bar-chat,
 .bar-chat .write-bar{
     display: flex; /* Para centrar su contenido e */
@@ -299,6 +308,7 @@ header{
     color: rgb(255, 247, 237);
     background-color: rgb(228, 190, 165);
     transition:  all 0.3s ease 0s;
+    cursor: pointer; 
 }   
 .chat-container .separador-aux{
     height: 0.25%;
@@ -311,12 +321,18 @@ header{
     height: 100%;
     width: 90%;
 }
+/*BURBUJAS DE CHAT*/
 .chat-container .window-chat{
     overflow-y: auto;
+    flex-direction: column;
 
     background-color: transparent; /*verde*/
     width: 100%;
     height: 75%;
+    padding: 15px;
+
+    display: flex;
+    align-items: center;
 }
 .chat-container .bar-chat{
     background-color: transparent; /*verde claro*/
@@ -326,9 +342,11 @@ header{
 .bar-chat .write-bar{
     height: 60%;
     width: 95%;
-    background-color: rgb(255, 255, 255); /*beige*/
+    background-color: white; /*beige*/
 
+    padding-right: 10px;
     border-radius: 12px;
+    gap: 5px;
 }
 .write-bar input{
     height: 100%;
@@ -345,16 +363,377 @@ header{
 .write-bar input::placeholder{
     color: rgb(228, 190, 165);;
 }
-.write-bar .btn-post{
+.write-bar .btn-post,
+.write-bar .btn-post-media,
+.write-bar .btn-post-location{
     height: 75%;
-    width: 5.5%;
+    width: 6%;
     border: none;
     background-color: rgb(228, 190, 165);;
     color: rgb(255, 247, 237);
     border-radius: 10px;
 }
-.btn-post:hover{
+.btn-post:hover,
+.btn-post-location:hover,
+.btn-post-media:hover{
     transition:  all 0.3s ease 0s;
     background-color: rgb(255, 247, 237);
+    color: rgb(228, 190, 165);
+    cursor: pointer; 
+}
+.window-chat .window-bubble{
+    background-color: transparent; /*rojo*/
+    width: 100%;
+    height: 18%;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.window-bubble .BubblePic,
+.window-bubble-dos .BubblePicDos{
+    width: 10%;
+    height: 85%;
+    border-radius: 100%;
+}
+.window-bubble textarea,
+.window-bubble-dos textarea{
+    height: 85%;
+    width: 40%;
+    padding: 10px;
+    border-radius: 15px;
+
+    outline: none;
+    border: none;
+    color: #e4d0c3;
+}
+.window-bubble textarea::placeholder,
+.window-bubble-dos textarea::placeholder{
+    color: #e4d0c3;
+}
+.window-chat .window-bubble-dos{
+    background-color: transparent; /*azul*/
+    width: 100%;
+    height: 18%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* alinea todo a la derecha */
+    gap: 10px;
+}
+/*barra de notificaciones*/
+.additional-container .additional-container-n,
+.additional-container .additional-container-p
+{
+    height: 50%;
+    width: 100%;
+    background-color: transparent; /*aqua*/
     color: rgb(228, 190, 165);;
+    padding: 15px;
+    border-radius: 30px;
+
+    box-shadow: 2px 9px 49px 5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+.additional-container-n .separador-h1,
+.additional-container-p .separador-h2{
+    height: 8%;
+    width: 100%;
+    background-color: transparent;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.separador-h1 .h-h1,
+.separador-h2 .h-h2{
+    height: 3px;
+    width: 100%;
+    background-color: rgb(228, 190, 165);;
+    border: none;
+}
+.additional-container-n .notificacion-container{
+    overflow-y: auto;
+    background-color: transparent; /*rosa*/
+    height: 100%;
+    width: 100%;
+}
+.notificacion-container .notificacion-bubble{
+    height: 20%;
+    width: 100%;
+
+    background-color: rgb(228, 190, 165);
+    color: rgb(255, 247, 237);
+
+    margin-bottom: 5px;
+    border-radius: 10px;
+
+    padding: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+/*hover*/
+.notificacion-bubble:hover{
+    background-color: rgb(255, 247, 237);
+    color: rgb(228, 190, 165);
+    transition:  all 0.3s ease 0s;
+    cursor: pointer;
+}
+/*progreso de las tareas*/
+.additional-container-p .task-container{
+    overflow-y: auto;
+    background-color: transparent; /*violeta*/
+    height: 100%;
+    width: 100%;
+}
+.task-container .task-progress{
+    height: 20%;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.task-progress .bar-progress{
+    background-color: rgb(255, 247, 237);
+    width: 100%;
+    height: 25%;
+    border-radius: 25px;
+    margin-top: 5px;
+}
+.bar-progress .bar-progress-progress{
+    background-color: rgb(228, 190, 165);
+    width: 50%;
+    height: 100%;
+    border-radius: 25px;
+}
+/*POP UP fondo*/
+.PopUp{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+/* Contenido del Pop up para crear las tareas */
+.modal-content{
+    width: 400px;
+    height: 450px;
+    background-color: rgb(255, 247, 237);
+    border-radius: 30px;
+    position: relative;
+    padding: 15px;
+
+    /*display flex es para centrar todo al centro*/
+    
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 2px 9px 49px -5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+}
+.modal-content .close{
+    background-color: transparent; /* red */
+    color: rgb(228, 190, 165);
+    height: 10%;
+    width: 10%;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+    font-size: 20px;
+}
+.close:hover{
+    color: rgb(255, 247, 237);
+    background-color: rgb(228, 190, 165);
+    transition: 0.3s ease;
+    font-size: 20px;
+    cursor: pointer;
+}
+.modal-content .task-info{
+    height: 100%;
+    width: 100%;
+    background-color: transparent; /*rosa*/
+
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.task-info textarea{
+    width: 100%;
+    height: 20%;
+
+    outline: none;
+    border: none;
+    color: rgb(228, 190, 165);
+    border-radius: 10px;
+    padding: 10px;
+}
+.task-info textarea::placeholder{
+    color: rgb(228, 190, 165);
+}
+.task-info p,
+.task-info h3{
+    color: rgb(228, 190, 165);
+}
+.task-info h4{
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(228, 190, 165);
+}
+.task-info .task-btn{
+    background-color: rgb(228, 190, 165);
+    color: rgb(255, 247, 237);
+    width: 100%;
+    height: 12%;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+}
+.task-btn:hover{
+    background-color: rgb(255, 247, 237);
+    color: rgb(228, 190, 165);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.task-info .separador-h4{
+    height: 5%;
+    width: 100%;
+    background-color: transparent; /*rojo*/
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.separador-h4 .h-h4{
+    border: none;
+    background-color: rgb(228, 190, 165);
+    height: 5px;
+    width: 100%;
+}
+.task-info .task-check{
+    width: 100%;
+    height: 25%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+.task-check h3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 400;
+}
+
+/*POP UP reclama recompensa*/
+.PopUpReward{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+/* Contenido del Pop up para crear las tareas */
+.modal-reward{
+    width: 250px;
+    height: 250px;
+    background-color: rgb(255, 247, 237);
+    border-radius: 30px;
+    position: relative;
+    padding: 15px;
+
+    /*display flex es para centrar todo al centro*/
+    
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 2px 9px 49px -5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+}
+.modal-reward .close-reward{
+    background-color: transparent; /* red */
+    color: rgb(228, 190, 165);
+    height: 19%;
+    width: 16%;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+    font-size: 20px;
+}
+.close-reward:hover{
+    color: rgb(255, 247, 237);
+    background-color: rgb(228, 190, 165);
+    transition: 0.3s ease;
+    font-size: 20px;
+    cursor: pointer;
+}
+.modal-reward .task-reward{
+    height: 100%;
+    width: 100%;
+    background-color: transparent; /*amarillo*/
+
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+.task-reward .separador-reward{
+    height: 5%;
+    width: 100%;
+    background-color: transparent; /*rojo*/
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.separador-reward .h-reward{
+    border: none;
+    background-color: rgb(228, 190, 165);
+    height: 5px;
+    width: 100%;
+}
+.task-reward h3, 
+.task-reward p{
+    color: rgb(228, 190, 165);
+}
+.task-reward .task-reward-btn{
+    width: 100%;
+    height: 20%;
+    border:none;
+    outline: none;
+    background-color: rgb(228, 190, 165);
+    color:rgb(255, 247, 237);
+    border-radius: 15px;
+}
+.task-reward-btn:hover{
+    background-color: rgb(255, 247, 237);
+    color:rgb(228, 190, 165);
 }

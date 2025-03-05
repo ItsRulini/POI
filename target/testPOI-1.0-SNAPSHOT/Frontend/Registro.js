@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(result => {
                     console.log("Respuesta del servidor:", result);
                     alert("Registro exitoso");
-                    window.location.href = "MAIN.jsp";
+                    window.location.href = "LOGIN.jsp";
                 })
                 .catch(error => {
                     console.error("Error detallado:", error);

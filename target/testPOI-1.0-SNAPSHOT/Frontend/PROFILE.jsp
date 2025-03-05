@@ -20,7 +20,7 @@
         <nav>
             <ul class="navlinks">
                 <li><a href="MAIN.jsp">Chats</a></li>
-                <li><a href="#">Rewards</a></li>
+                <li><a href="#" id="Crear">Tasks</a></li>
                 <li><a href="LOGIN.jsp">Log out</a></li>
             </ul>
         </nav>
@@ -98,5 +98,27 @@
             </div>
         </div>
     </div>
+    <!-- Ventana PopUp para crear las tareas -->
+    <div class="PopUp"> <!-- fondo -->
+        <div class="modal-content"> <!-- Ventana base -->
+            <button class="close"><i class="fa-solid fa-arrow-left"></i></button>
+            <div class="task-info">
+                <h4>Create a new task</h4>
+                <div class="separador-h4">
+                    <hr class="h-h4">
+                </div>
+                <textarea name="description-task" id="task" placeholder="Task description..."></textarea>
+                <div class="task-check">
+                    <h3>Select the reward</h3>
+                    <p><input type="checkbox" name="section" value="sports">#1 Reward</p>
+                    <p><input type="checkbox" name="section" value="business">#2 Reward</p>
+                </div>
+                <button type="submit" class="task-btn">Create task</button>
+            </div>
+        </div>
+    </div>
+    <!-- para el popup -->   
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="PROFILE.js"></script>
 </body>
 </html>
