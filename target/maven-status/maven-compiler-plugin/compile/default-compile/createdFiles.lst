@@ -1,7 +1,14 @@
 dao\usuarioDAO.class
 servlets\LoginServlet.class
-clases\Conexion.class
+models\Chat.class
 servlets\RegistroServlet.class
+models\Chat$Tipo.class
 models\Usuario.class
 com\mycompany\testpoi\resources\JakartaEE10Resource.class
+models\Tarea_Usuario$Estatus.class
 com\mycompany\testpoi\JakartaRestConfiguration.class
+servlets\LogOutServlet.class
+dao\tarea_usuarioDAO.class
+clases\Conexion.class
+models\Tarea.class
+models\Tarea_Usuario.class

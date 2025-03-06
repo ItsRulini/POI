@@ -41,6 +41,7 @@ public class usuarioDAO {
 
             if (rs.next()) {
                 user = new Usuario();
+                user.setIdUsuario(rs.getInt("idUsuario"));
                 user.setUsuario(rs.getString("usuario"));
                 user.setCorreo(rs.getString("correo"));
                 user.setNombres(rs.getString("nombres"));
@@ -119,6 +120,43 @@ public class usuarioDAO {
             }
         }
 
+    }
+    
+    public List<Usuario> getAllUsuarios() {
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        CallableStatement cs = null;
+        ResultSet rs = null;
+        
+        try {
+            // Llamar al procedimiento almacenado (no olvides el nombre correcto de tu procedimiento)
+            String query = "{CALL spGetAllUsuarios()}";
+            cs = conn.prepareCall(query);
+            
+            rs = cs.executeQuery();
+            
+            while(rs.next()){
+                Usuario usuario = new Usuario();
+                usuario.setIdUsuario(rs.getInt("idUsuario"));
+                usuario.setUsuario(rs.getString("usuario"));
+                
+                usuarios.add(usuario); // Ingresamos al usuario que nos trajimos a la lista
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Error SQL: " + ex.getMessage());
+            ex.printStackTrace();
+        } finally {
+            // Asegurarse de cerrar el CallableStatement para liberar recursos
+            try {
+                if (rs != null) rs.close();
+                if (cs != null) cs.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return usuarios;
     }
 
 }

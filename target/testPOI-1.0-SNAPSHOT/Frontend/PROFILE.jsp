@@ -21,7 +21,7 @@
             <ul class="navlinks">
                 <li><a href="MAIN.jsp">Chats</a></li>
                 <li><a href="#" id="Crear">Tasks</a></li>
-                <li><a href="LOGIN.jsp">Log out</a></li>
+                <li><a href="../LogOutServlet">Log out</a></li>
             </ul>
         </nav>
         <a href="PROFILE.jsp" class="cta"><button class="btn-profile">Profile</button></a>

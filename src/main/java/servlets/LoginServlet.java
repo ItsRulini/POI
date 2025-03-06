@@ -6,6 +6,11 @@ package servlets;
 
 import clases.Conexion;
 import dao.usuarioDAO;
+import dao.tarea_usuarioDAO;
+
+import models.Usuario;
+import models.Tarea_Usuario;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +19,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.Usuario;
+import java.util.List;
+import java.util.HashSet;
 
 /**
  *
@@ -82,11 +88,16 @@ public class LoginServlet extends HttpServlet {
         try {
             Conexion conn = new Conexion();
             usuarioDAO uDao = new usuarioDAO(conn.Conectar());
-
+            tarea_usuarioDAO tareaUsuario = new tarea_usuarioDAO(conn.Conectar());
+            
             Usuario user = uDao.buscarUsuario(usuario, contraseña);
-
+            List<Usuario> usuarios = uDao.getAllUsuarios();
+            
             if (user != null) {
+                HashSet<Tarea_Usuario> tareas = tareaUsuario.getTareas(user.getIdUsuario());
+                
                 HttpSession session = request.getSession();
+                session.setAttribute("idUsuario", user.getIdUsuario());
                 session.setAttribute("Usuario", user.getUsuario());
                 session.setAttribute("Nombres", user.getNombres());
                 session.setAttribute("Paterno", user.getPaterno());
@@ -97,6 +108,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("Descripcion", user.getDescripcion());
                 session.setAttribute("Contraseña", user.getContraseña());
                 session.setAttribute("Avatar", user.getAvatar());
+                
+                session.setAttribute("Lista", usuarios); // Lista de usuarios disponibles
+                session.setAttribute("ListaTareas", tareas); // Lista de tareas del usuario que se logeó
 
                 //Metodo para redireccionar a otra vista/Servlet
                 response.sendRedirect("Frontend/MAIN.jsp");

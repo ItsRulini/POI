@@ -21,7 +21,7 @@ public class Usuario {
     Date fechaNacimiento;
     String descripcion;
     Date fechaRegistro;
-
+    
     public Usuario() {
     }
 

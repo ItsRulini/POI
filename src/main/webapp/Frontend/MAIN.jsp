@@ -1,4 +1,9 @@
+<%@page import="models.Usuario"%>
+<%@page import="models.Tarea_Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.HashSet"%>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -21,13 +26,17 @@
             <ul class="navlinks">
                 <li><a href="MAIN.jsp">Chats</a></li>
                 <li><a href="#" id="Crear">Tasks</a></li>
-                <li><a href="LOGIN.jsp">Log out</a></li>
+                <li><a href="../LogOutServlet">Log out</a></li>
             </ul>
         </nav>
         <a href="PROFILE.jsp" class="cta"><button class="btn-profile">Profile</button></a>
     </header>
     
     <%
+        List<Usuario> usuarios = (List) request.getSession().getAttribute("Lista");
+        
+        HashSet<Tarea_Usuario> listaTareas = (HashSet<Tarea_Usuario>) request.getSession().getAttribute("ListaTareas");
+
         String usuario = request.getSession().getAttribute("Usuario").toString();
         String avatar = request.getSession().getAttribute("Avatar") == null ? "" : request.getSession().getAttribute("Avatar").toString();
     %>
@@ -37,6 +46,7 @@
         <!-- aqui se muestra el icono del usuario
          junto con sus chats disponibles y para crear nuevos -->
          <!-- 1. -->
+         
         <div class="sidebar">
             <!-- nos ayuda a solo centrar el usuario (su foto) -->
             <div class="user-container">
@@ -60,25 +70,32 @@
             <!-- 1. -->
             <div class="chats-display">
             <!-- chats disponibles o creados -->
+            <%
+                for(Usuario item : usuarios) {
+            %>
              <div class="chats-active"> <!-- container principal del chat -->
                 <div class="user-display-photo">
                     <img class="Pic" alt="ChiChat" src="logo.jpg">
                 </div>
+                
                 <div class="user-convo">
-                    <p class="username">Mi primer chat</p>
+                    <p class="username"><%=item.getUsuario()%></p>
                     <p class="conversation">Mi primera conversacion</p>
                 </div>
+                    
              </div>
-             
+             <%}%>
             </div>
         </div>
+        
         <!-- 2. -->
         <!-- chat acttivo -->
+        
         <div class="chat-container">
             <!-- barra de arriba del chat -->
             <div class="chat-display-top">
                 <div class="display-top-aux">
-                    <p>Conversation name</p>
+                    <p>Conversation</p>
                 </div>
                 <div class="display-icons-group">
                     <i class="fa-solid fa-phone"></i>
@@ -108,6 +125,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- 3. -->
         <!-- ventana de premios -->
         <div class="additional-container">
@@ -129,14 +147,18 @@
                     <hr class="h-h2">
                 </div>
                 <!-- progreso de las tareas -->
+                
+                <%for(Tarea_Usuario item : listaTareas) {%>
+                
                 <div class="task-container">
                     <div class="task-progress">
-                        <p> [Task name] progress...</p>
+                        <p> <%=item.getTarea().getDescripcion()%></p>
                         <div class="bar-progress">
                             <div class="bar-progress-progress"></div>
                         </div>
                     </div>
                 </div>
+                <%}%>
             </div>
         </div>
     <!-- Ventana PopUp para crear las tareas -->
