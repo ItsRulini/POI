@@ -70,21 +70,18 @@
             <!-- 1. -->
             <div class="chats-display">
             <!-- chats disponibles o creados -->
-            <%
-                for(Usuario item : usuarios) {
-            %>
+            
              <div class="chats-active"> <!-- container principal del chat -->
                 <div class="user-display-photo">
                     <img class="Pic" alt="ChiChat" src="logo.jpg">
                 </div>
                 
                 <div class="user-convo">
-                    <p class="username"><%=item.getUsuario()%></p>
+                    <p class="username">Nombre de la conversación</p>
                     <p class="conversation">Mi primera conversacion</p>
                 </div>
                     
              </div>
-             <%}%>
             </div>
         </div>
         
@@ -210,10 +207,14 @@
                 <hr class="h-chat">
             </div>
             <div class="c-chat">
+                <%
+                for(Usuario item : usuarios) {
+                %>
                 <div class="new-convo">
                     <img class="new-pfp" alt="ChiChat" src="logo.jpg">
-                    <p>Username</p>
+                    <p><%=item.getUsuario()%></p>
                 </div>
+                <%}%>
             </div>
             <button class="start-btn">Start chatting</button>
         </div>
