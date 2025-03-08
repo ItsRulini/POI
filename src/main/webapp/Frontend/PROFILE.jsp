@@ -42,9 +42,8 @@
     
 
     <div class="profile-container">
-        <form action="../CambiosPerfilServlet" method="POST">
-            
-            <div class="profile-container-general">
+        
+        <form action="../CambiosPerfilServlet" method="POST" class="profile-container-general">
                 <div class="profile-img-user">
                     <div class="profile-pfp">
                         <img class="Pfp" alt="ChiChat" src="<%=avatar%>">
@@ -98,7 +97,6 @@
                 <div class="separador-dos">
                     <hr class="h2">
                 </div>
-            </div>
         </form>
         
     </div>

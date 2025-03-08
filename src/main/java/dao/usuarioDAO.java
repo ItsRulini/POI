@@ -74,17 +74,18 @@ public class usuarioDAO {
     }
 
     public boolean updateUsuario(Usuario usuario) {
-        String query = "{CALL spUpdateUsuario(?,?,?,?,?,?,?,?)}";
+        String query = "{CALL spUpdateUsuario(?,?,?,?,?,?,?,?,?)}";
 
         try (CallableStatement cs = conn.prepareCall(query)) {
             cs.setInt(1, usuario.getIdUsuario());
             cs.setString(2, usuario.getUsuario());
-            cs.setString(3, usuario.getNombres());
-            cs.setString(4, usuario.getPaterno());
-            cs.setString(5, usuario.getMaterno());
-            cs.setString(6, usuario.getAvatar());
-            cs.setString(7, usuario.getDescripcion());
-            cs.setString(8, usuario.getContraseña());
+            cs.setString(3, usuario.getCorreo());
+            cs.setString(4, usuario.getNombres());
+            cs.setString(5, usuario.getPaterno());
+            cs.setString(6, usuario.getMaterno());
+            cs.setString(7, usuario.getAvatar());
+            cs.setString(8, usuario.getDescripcion());
+            cs.setString(9, usuario.getContraseña());
 
             int filasAfectadas = cs.executeUpdate();
             return filasAfectadas > 0; // Devuelve true si al menos una fila fue actualizada

@@ -103,9 +103,9 @@ public class CambiosPerfilServlet extends HttpServlet {
                 if(udao.updateUsuario(user)){
                     user = udao.usuarioPorId(id); // Actualiza al usuario
                     
-                    HttpSession session = request.getSession();
-                    session.invalidate();
-                    session = request.getSession(true);
+                    HttpSession session = request.getSession(false); // sin crar una nueva sesión
+                    //session.invalidate();
+                    //session = request.getSession(true);
                     
                     session.setAttribute("Usuario", user.getUsuario());
                     session.setAttribute("Nombres", user.getNombres());
