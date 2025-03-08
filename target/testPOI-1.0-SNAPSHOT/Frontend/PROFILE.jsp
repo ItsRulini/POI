@@ -2,48 +2,48 @@
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <!-- css -->
-    <link rel="stylesheet" href="PROFILE.css">
-    <!-- Uso de GSAP para animaciones -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <!-- Fonts Awesome para iconos -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <!-- css -->
+        <link rel="stylesheet" href="PROFILE.css">
+        <!-- Uso de GSAP para animaciones -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <!-- Fonts Awesome para iconos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-</head>
-<body>
-    <header>
-        <img class="Logo" alt="ChiChat" src="logo.jpg">
-        <nav>
-            <ul class="navlinks">
-                <li><a href="MAIN.jsp">Chats</a></li>
-                <li><a href="#" id="Crear">Tasks</a></li>
-                <li><a href="../LogOutServlet">Log out</a></li>
-            </ul>
-        </nav>
-        <a href="PROFILE.jsp" class="cta"><button class="btn-profile">Profile</button></a>
-    </header>
-    
-    <%
-        String usuario = request.getSession().getAttribute("Usuario").toString();
-        String nombre = request.getSession().getAttribute("Nombres").toString();
-        String paterno = request.getSession().getAttribute("Paterno").toString();
-        String materno = request.getSession().getAttribute("Materno").toString();
-        String email = request.getSession().getAttribute("Email").toString();
-        String nacimiento = request.getSession().getAttribute("Nacimiento").toString();
-        String registro = request.getSession().getAttribute("Registro").toString();
-        String biografia = request.getSession().getAttribute("Descripcion") != null ? request.getSession().getAttribute("Descripcion").toString() : "";
-        String pass = request.getSession().getAttribute("Contraseña").toString();
-        String avatar = request.getSession().getAttribute("Avatar").toString();
-    %>
-    
+    </head>
+    <body>
+        <header>
+            <img class="Logo" alt="ChiChat" src="logo.jpg">
+            <nav>
+                <ul class="navlinks">
+                    <li><a href="MAIN.jsp">Chats</a></li>
+                    <li><a href="#" id="Crear">Tasks</a></li>
+                    <li><a href="../LogOutServlet">Log out</a></li>
+                </ul>
+            </nav>
+            <a href="PROFILE.jsp" class="cta"><button class="btn-profile">Profile</button></a>
+        </header>
 
-    <div class="profile-container">
-        
-        <form action="../CambiosPerfilServlet" method="POST" class="profile-container-general">
+        <%
+            String usuario = request.getSession().getAttribute("Usuario").toString();
+            String nombre = request.getSession().getAttribute("Nombres").toString();
+            String paterno = request.getSession().getAttribute("Paterno").toString();
+            String materno = request.getSession().getAttribute("Materno").toString();
+            String email = request.getSession().getAttribute("Email").toString();
+            String nacimiento = request.getSession().getAttribute("Nacimiento").toString();
+            String registro = request.getSession().getAttribute("Registro").toString();
+            String biografia = request.getSession().getAttribute("Descripcion") != null ? request.getSession().getAttribute("Descripcion").toString() : "";
+            String pass = request.getSession().getAttribute("Contraseña").toString();
+            String avatar = request.getSession().getAttribute("Avatar").toString();
+        %>
+
+
+        <div class="profile-container">
+
+            <form action="../CambiosPerfilServlet" method="POST" class="profile-container-general">
                 <div class="profile-img-user">
                     <div class="profile-pfp">
                         <img class="Pfp" alt="ChiChat" src="<%=avatar%>">
@@ -97,30 +97,38 @@
                 <div class="separador-dos">
                     <hr class="h2">
                 </div>
-        </form>
-        
-    </div>
-    <!-- Ventana PopUp para crear las tareas -->
-    <div class="PopUp"> <!-- fondo -->
-        <div class="modal-content"> <!-- Ventana base -->
-            <button class="close"><i class="fa-solid fa-arrow-left"></i></button>
-            <div class="task-info">
-                <h4>Create a new task</h4>
-                <div class="separador-h4">
-                    <hr class="h-h4">
+            </form>
+
+            <script>
+                // Obtener los parámetros de la URL
+                const params = new URLSearchParams(window.location.search);
+                if (params.has("error")) {
+                    alert("Error, usuario o correo ya existentes");
+                }
+            </script>
+
+        </div>
+        <!-- Ventana PopUp para crear las tareas -->
+        <div class="PopUp"> <!-- fondo -->
+            <div class="modal-content"> <!-- Ventana base -->
+                <button class="close"><i class="fa-solid fa-arrow-left"></i></button>
+                <div class="task-info">
+                    <h4>Create a new task</h4>
+                    <div class="separador-h4">
+                        <hr class="h-h4">
+                    </div>
+                    <textarea name="description-task" id="task" placeholder="Task description..."></textarea>
+                    <div class="task-check">
+                        <h3>Select the reward</h3>
+                        <p><input type="checkbox" name="section" value="sports">#1 Reward</p>
+                        <p><input type="checkbox" name="section" value="business">#2 Reward</p>
+                    </div>
+                    <button type="submit" class="task-btn">Create task</button>
                 </div>
-                <textarea name="description-task" id="task" placeholder="Task description..."></textarea>
-                <div class="task-check">
-                    <h3>Select the reward</h3>
-                    <p><input type="checkbox" name="section" value="sports">#1 Reward</p>
-                    <p><input type="checkbox" name="section" value="business">#2 Reward</p>
-                </div>
-                <button type="submit" class="task-btn">Create task</button>
             </div>
         </div>
-    </div>
-    <!-- para el popup -->   
-    <script src="js/bootstrap.bundle.js"></script>
-    <script src="PROFILE.js"></script>
-</body>
+        <!-- para el popup -->   
+        <script src="js/bootstrap.bundle.js"></script>
+        <script src="PROFILE.js"></script>
+    </body>
 </html>

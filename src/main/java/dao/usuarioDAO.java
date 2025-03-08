@@ -27,19 +27,19 @@ public class usuarioDAO {
     public usuarioDAO(Connection conn) {
         this.conn = conn;
     }
-    
-    public Usuario usuarioPorId(int id){
+
+    public Usuario usuarioPorId(int id) {
         PreparedStatement ps = null;
         Usuario user = null;
-        try{
+        try {
             String query = "SELECT * FROM Usuarios WHERE idUsuario = ?";
             ps = conn.prepareStatement(query);
-            
+
             ps.setInt(1, id);
-            
+
             ResultSet rs = ps.executeQuery();
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 user = new Usuario();
                 user.setIdUsuario(rs.getInt("idUsuario"));
                 user.setUsuario(rs.getString("usuario"));
@@ -55,7 +55,7 @@ public class usuarioDAO {
             }
             rs.close();
             ps.close();
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.out.println("Error SQL: " + ex.getMessage());
             ex.printStackTrace();
             return null;
@@ -69,7 +69,7 @@ public class usuarioDAO {
                 e.printStackTrace();
             }
         }
-        
+
         return user;
     }
 
@@ -91,12 +91,15 @@ public class usuarioDAO {
             return filasAfectadas > 0; // Devuelve true si al menos una fila fue actualizada
 
         } catch (SQLException ex) {
-            System.err.println("Error SQL: " + ex.getMessage());
+            if (ex.getSQLState().equals("23000")) { // Código de error SQL para restricción UNIQUE
+                System.err.println("Error: Usuario o correo ya existente.");
+            } else {
+                System.err.println("Error SQL: " + ex.getMessage());
+            }
             return false;
         }
     }
 
-    
     public Usuario buscarUsuario(String usuario, String password) {
         CallableStatement cs = null;
         Usuario user = null;
@@ -121,7 +124,7 @@ public class usuarioDAO {
                 user.setFechaNacimiento(rs.getDate("fechaNacimiento"));
                 user.setFechaRegistro(rs.getDate("fechaRegistro"));
                 user.setContraseña(rs.getString("contraseña"));
-                
+
             }
 
             rs.close();
@@ -141,7 +144,7 @@ public class usuarioDAO {
                 e.printStackTrace();
             }
         }
-        
+
         return user;
     }
 
@@ -190,41 +193,45 @@ public class usuarioDAO {
         }
 
     }
-    
+
     public List<Usuario> getAllUsuarios() {
-        
+
         List<Usuario> usuarios = new ArrayList<>();
         CallableStatement cs = null;
         ResultSet rs = null;
-        
+
         try {
             // Llamar al procedimiento almacenado (no olvides el nombre correcto de tu procedimiento)
             String query = "{CALL spGetAllUsuarios()}";
             cs = conn.prepareCall(query);
-            
+
             rs = cs.executeQuery();
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsuario(rs.getString("usuario"));
-                
+
                 usuarios.add(usuario); // Ingresamos al usuario que nos trajimos a la lista
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("Error SQL: " + ex.getMessage());
             ex.printStackTrace();
         } finally {
             // Asegurarse de cerrar el CallableStatement para liberar recursos
             try {
-                if (rs != null) rs.close();
-                if (cs != null) cs.close();
+                if (rs != null) {
+                    rs.close();
+                }
+                if (cs != null) {
+                    cs.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        
+
         return usuarios;
     }
 

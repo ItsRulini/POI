@@ -77,7 +77,7 @@ public class CambiosPerfilServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = (int) request.getSession().getAttribute("idUsuario");
-        
+
         String usuario = request.getParameter("usuario");
         String biografia = request.getParameter("biografia");
         String nombres = request.getParameter("nombre");
@@ -85,14 +85,14 @@ public class CambiosPerfilServlet extends HttpServlet {
         String materno = request.getParameter("materno");
         String email = request.getParameter("email");
         String pass = request.getParameter("pass");
-        
-        try{
+
+        try {
             Conexion conn = new Conexion();
             Usuario user = new Usuario();
             usuarioDAO udao = new usuarioDAO(conn.Conectar());
             user = udao.usuarioPorId(id);
-            
-            if(user != null){
+
+            if (user != null) {
                 user.setUsuario(usuario);
                 user.setDescripcion(biografia);
                 user.setNombres(nombres);
@@ -100,13 +100,14 @@ public class CambiosPerfilServlet extends HttpServlet {
                 user.setMaterno(materno);
                 user.setCorreo(email);
                 user.setContraseña(pass);
-                if(udao.updateUsuario(user)){
+
+                if (udao.updateUsuario(user)) {
                     user = udao.usuarioPorId(id); // Actualiza al usuario
-                    
+
                     HttpSession session = request.getSession(false); // sin crar una nueva sesión
                     //session.invalidate();
                     //session = request.getSession(true);
-                    
+
                     session.setAttribute("Usuario", user.getUsuario());
                     session.setAttribute("Nombres", user.getNombres());
                     session.setAttribute("Paterno", user.getPaterno());
@@ -117,19 +118,21 @@ public class CambiosPerfilServlet extends HttpServlet {
                     session.setAttribute("Descripcion", user.getDescripcion());
                     session.setAttribute("Contraseña", user.getContraseña());
                     session.setAttribute("Avatar", user.getAvatar());
-                    
+
                     //Metodo para redireccionar a otra vista/Servlet
-                response.sendRedirect("Frontend/PROFILE.jsp");
+                    response.sendRedirect("Frontend/PROFILE.jsp");
+                } else {
+                    response.sendRedirect("Frontend/PROFILE.jsp?error=duplicado"); // O muestra un mensaje en la vista
                 }
-                    
+
             }
-            
-        }catch (Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             response.setContentType("application/json");
             response.getWriter().write("{\"status\": \"error\", \"message\": \"" + e.getMessage() + "\"}");
         }
-        
+
     }
 
     /**
