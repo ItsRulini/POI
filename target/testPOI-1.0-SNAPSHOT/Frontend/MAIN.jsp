@@ -62,8 +62,8 @@
                 <div class="elements-aux">
                     <p>Last chats</p>
                     <div class="icons-group">
-                        <i class="fa-solid fa-plus"></i>
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                        <i class="fa-solid fa-plus" id="CrearChat"></i>
+                        <i class="fa-solid fa-ellipsis-vertical" id="CrearDelete"></i>
                     </div>
                 </div>
             </div>
@@ -153,9 +153,6 @@
                 <div class="task-container">
                     <div class="task-progress">
                         <p> <%=item.getTarea().getDescripcion()%></p>
-                        <div class="bar-progress">
-                            <div class="bar-progress-progress"></div>
-                        </div>
                     </div>
                 </div>
                 <%}%>
@@ -180,7 +177,10 @@
             </div>
         </div>
     </div>
-    <!-- Ventana PopUp para reclamar recompensas -->
+    
+    </div>
+    
+            <!-- Ventana PopUp para reclamar recompensas -->
     <div class="PopUpReward"> <!-- fondo -->
         <div class="modal-reward"> <!-- Ventana base -->
             <button class="close-reward"><i class="fa-solid fa-arrow-left"></i></button>
@@ -195,7 +195,48 @@
             </div>
         </div>
     </div>
+    
+    <!-- Ventana PopUp para crear chat -->
+    <div class="PopUpChat"> <!-- fondo -->
+        <div class="modal-chat"> <!-- Ventana base -->
+            <div class="close-newchat">
+                <button class="close-chat"><i class="fa-solid fa-arrow-left"></i></button>
+                <p>New message</p>
+            </div>
+            <div class="chat-to">
+                <p>To:</p>
+            </div>
+            <div class="separador-chat">
+                <hr class="h-chat">
+            </div>
+            <div class="c-chat">
+                <div class="new-convo">
+                    <img class="new-pfp" alt="ChiChat" src="logo.jpg">
+                    <p>Username</p>
+                </div>
+            </div>
+            <button class="start-btn">Start chatting</button>
+        </div>
     </div>
+    <!-- Ventana PopUp para eliminar chat -->
+    <div class="PopUpDelete"> <!-- fondo -->
+        <div class="modal-delete"> <!-- Ventana base -->
+            <div class="close-deletechat">
+                <button class="close-delete"><i class="fa-solid fa-arrow-left"></i></button>
+                <p>Delete chat</p>
+            </div>
+            <div class="separador-delete">
+                <hr class="h-delete">
+            </div>
+            <div class="c-delete">
+                <div class="new-delete">
+                    <img class="new-deleteimg" alt="ChiChat" src="logo.jpg">
+                    <p>Chat or Username</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script src="js/bootstrap.bundle.js"></script>
     <script src="MAIN.js"></script>
     

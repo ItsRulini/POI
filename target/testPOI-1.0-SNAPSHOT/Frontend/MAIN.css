@@ -179,8 +179,6 @@ header{
     height: 100%;
     background-color: transparent;
     display: flex;
-    
-    
 }
 .icons-group i{
     border-radius: 15px;
@@ -505,19 +503,8 @@ header{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-.task-progress .bar-progress{
-    background-color: rgb(255, 247, 237);
-    width: 100%;
-    height: 25%;
-    border-radius: 25px;
-    margin-top: 5px;
-}
-.bar-progress .bar-progress-progress{
-    background-color: rgb(228, 190, 165);
-    width: 50%;
-    height: 100%;
-    border-radius: 25px;
+
+    cursor: pointer;
 }
 /*POP UP fondo*/
 .PopUp{
@@ -736,4 +723,274 @@ header{
 .task-reward-btn:hover{
     background-color: rgb(255, 247, 237);
     color:rgb(228, 190, 165);
+}
+/*POP UP crear chat*/
+.PopUpChat{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+/* Contenido del Pop up para crear los chats */
+.modal-chat{
+    width: 320px;
+    height: 450px;
+    background-color: rgb(255, 247, 237);
+    border-radius: 30px;
+    position: relative;
+    padding: 15px;
+
+    /*display flex es para centrar todo al centro*/
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    box-shadow: 2px 9px 49px -5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+}
+.modal-chat p{
+    color: rgb(228, 190, 165);
+}
+.modal-chat .close-newchat{
+    width: 100%;
+    min-height: 9%;
+    
+    border: none;
+    outline: none;
+    background-color: transparent; /*red*/
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.close-newchat button{
+    width: 12%;
+    height: 100%;
+
+    background-color: rgb(139, 98, 71);;
+    color: rgb(255, 247, 237);
+
+    border: none;
+    outline: none;
+
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.close-newchat button:hover{
+    background-color: rgb(255, 247, 237);
+    color: rgb(139, 98, 71);;
+    transition: 0.3s ease;
+}
+.modal-chat .chat-to{
+    background-color: transparent; /*green*/
+    width: 100%;
+    min-height: 10%;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    overflow-x: hidden; /* Permitir desplazamiento horizontal */
+    flex-wrap: nowrap; /* Evita que los elementos pasen a una nueva línea */
+    white-space: nowrap; /* Evita que el contenido se divida */
+}
+.chat-to button{
+    min-width: 52%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: rgb(228, 190, 165);
+    color: rgb(255, 247, 237);
+
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.chat-to button:hover{
+    background-color: rgb(255, 247, 237);
+    color: rgb(228, 190, 165);
+    transition: 0.3s ease;
+}
+.modal-chat .separador-chat{
+    min-height: 5%;
+    width: 100%;
+    background-color: transparent; /*rojo*/
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.separador-chat .h-chat{
+    border: none;
+    background-color: rgb(228, 190, 165);
+    height: 2px;
+    width: 100%;
+}
+.modal-chat .c-chat{
+    min-height: 68%;
+    width: 100%;
+    background-color: transparent; /*coral*/
+
+    overflow-y: auto;
+}
+.c-chat .new-convo{
+    width: 100%;
+    height: 17%;
+    background-color: transparent;
+
+    border-radius: 5px;
+
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.new-convo:hover{
+    background-color: white;
+    transition: 0.3s ease;
+}
+.new-convo img{
+    border-radius: 100%;
+    height: 100%;
+    min-width: 18%;
+}
+.start-btn{
+    border-radius: 10px;
+    height: 15%;
+
+    border: none;
+    outline: none;
+
+    background-color: rgb(139, 98, 71);;
+    color: rgb(255, 247, 237);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.start-btn:hover{
+    color: rgb(139, 98, 71);;
+    background-color: rgb(255, 247, 237);
+    transition: 0.3s ease;
+}
+/*POP UP para borrar chat*/
+.PopUpDelete{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+/* Contenido del Pop up para borrar los chats */
+.modal-delete{
+    width: 320px;
+    height: 450px;
+    background-color: rgb(255, 247, 237);
+    border-radius: 30px;
+    position: relative;
+    padding: 15px;
+
+    /*display flex es para centrar todo al centro*/
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+
+    box-shadow: 2px 9px 49px -5px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+}
+.modal-delete p{
+    color: rgb(228, 190, 165);
+}
+.modal-delete .close-deletechat{
+    width: 100%;
+    height: 9%;
+    
+    border: none;
+    outline: none;
+    background-color: transparent; /*red*/
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.close-deletechat button{
+    width: 12%;
+    height: 100%;
+
+    background-color: rgb(139, 98, 71);;
+    color: rgb(255, 247, 237);
+
+    border: none;
+    outline: none;
+
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.close-deletechat button:hover{
+    background-color: rgb(255, 247, 237);
+    color: rgb(139, 98, 71);;
+    transition: 0.3s ease;
+}
+.modal-delete .separador-delete{
+    height: 5%;
+    width: 100%;
+    background-color: transparent; /*rojo*/
+
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.separador-delete .h-delete{
+    border: none;
+    background-color: rgb(228, 190, 165);
+    height: 2px;
+    width: 100%;
+}
+.modal-delete .c-delete{
+    height: 76%;
+    width: 100%;
+    background-color: transparent; /*coral*/
+
+    overflow-y: auto;
+}
+.c-delete .new-delete{
+    width: 100%;
+    height: 15%;
+    background-color: transparent;
+
+    border-radius: 5px;
+
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.new-delete:hover{
+    background-color: white;
+    transition: 0.3s ease;
+}
+.new-delete img{
+    border-radius: 100%;
+    height: 100%;
+    min-width: 18%;
 }
