@@ -11,4 +11,5 @@ servlets\LogOutServlet.class
 dao\tarea_usuarioDAO.class
 clases\Conexion.class
 models\Tarea.class
+servlets\CambiosPerfilServlet.class
 models\Tarea_Usuario.class

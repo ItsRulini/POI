@@ -27,7 +27,75 @@ public class usuarioDAO {
     public usuarioDAO(Connection conn) {
         this.conn = conn;
     }
+    
+    public Usuario usuarioPorId(int id){
+        PreparedStatement ps = null;
+        Usuario user = null;
+        try{
+            String query = "SELECT * FROM Usuarios WHERE idUsuario = ?";
+            ps = conn.prepareStatement(query);
+            
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                user = new Usuario();
+                user.setIdUsuario(rs.getInt("idUsuario"));
+                user.setUsuario(rs.getString("usuario"));
+                user.setCorreo(rs.getString("correo"));
+                user.setNombres(rs.getString("nombres"));
+                user.setPaterno(rs.getString("paterno"));
+                user.setMaterno(rs.getString("materno"));
+                user.setAvatar(rs.getString("avatar"));
+                user.setDescripcion(rs.getString("descripcion"));
+                user.setFechaNacimiento(rs.getDate("fechaNacimiento"));
+                user.setFechaRegistro(rs.getDate("fechaRegistro"));
+                user.setContraseña(rs.getString("contraseña"));
+            }
+            rs.close();
+            ps.close();
+        }catch (SQLException ex) {
+            System.out.println("Error SQL: " + ex.getMessage());
+            ex.printStackTrace();
+            return null;
+        } finally {
+            // Asegurarse de cerrar el CallableStatement para liberar recursos
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return user;
+    }
 
+    public boolean updateUsuario(Usuario usuario) {
+        String query = "{CALL spUpdateUsuario(?,?,?,?,?,?,?,?)}";
+
+        try (CallableStatement cs = conn.prepareCall(query)) {
+            cs.setInt(1, usuario.getIdUsuario());
+            cs.setString(2, usuario.getUsuario());
+            cs.setString(3, usuario.getNombres());
+            cs.setString(4, usuario.getPaterno());
+            cs.setString(5, usuario.getMaterno());
+            cs.setString(6, usuario.getAvatar());
+            cs.setString(7, usuario.getDescripcion());
+            cs.setString(8, usuario.getContraseña());
+
+            int filasAfectadas = cs.executeUpdate();
+            return filasAfectadas > 0; // Devuelve true si al menos una fila fue actualizada
+
+        } catch (SQLException ex) {
+            System.err.println("Error SQL: " + ex.getMessage());
+            return false;
+        }
+    }
+
+    
     public Usuario buscarUsuario(String usuario, String password) {
         CallableStatement cs = null;
         Usuario user = null;

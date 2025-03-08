@@ -42,61 +42,65 @@
     
 
     <div class="profile-container">
-        <div class="profile-container-general">
-            <div class="profile-img-user">
-                <div class="profile-pfp">
-                    <img class="Pfp" alt="ChiChat" src="<%=avatar%>">
-                </div>
-                <div class="profile-user-bio">
-                    <input type="text" name="" id="" value="<%=usuario%>" placeholder="Username" class="profile-p">
-                    
-                    <input type="text" name="" id="" value= "<%=biografia%>" placeholder="Mi biografia">
-                </div>
-            </div>
-            <!-- separador -->
-            <div class="separador">
-                <hr class="h">
-            </div>
-            <!-- 1. -->
-            <div class="profile-icon-name">
-                <i class="fa-solid fa-user"></i>
-                <p>Names</p>
-            </div>
-            <div class="profile-names">
-                <input type="text" name="" id="" value="<%=nombre%>" placeholder="First name">
-                <input type="text" name="" id="" value="<%=paterno%>" placeholder="Last name">
-                <input type="text" name="" id="" value="<%=materno%>" placeholder="Last name">
-            </div>
-            <!-- 2. -->
-            <div class="profile-icon-manage">
-                <i class="fa-solid fa-lock"></i>
-                <p>Account Managment</p>
-            </div>
-            <div class="profile-manage">
-                <input type="text" name="" id="" value="<%=email%>" placeholder="email@example.com">
-                <input type="password" name="" id="" value="<%=pass%>" placeholder="Password">
-            </div>
-            <!-- 3. -->
-            <div class="profile-icon-birth">
-                <i class="fa-solid fa-cake"></i>
-                <p>Birthdate</p>
+        <form action="../CambiosPerfilServlet" method="POST">
+            
+            <div class="profile-container-general">
+                <div class="profile-img-user">
+                    <div class="profile-pfp">
+                        <img class="Pfp" alt="ChiChat" src="<%=avatar%>">
+                    </div>
+                    <div class="profile-user-bio">
+                        <input type="text" name="usuario" id="" value="<%=usuario%>" placeholder="Username" class="profile-p">
 
-                <i class="fa-solid fa-user"></i>
-                <p class="Member-since">Member Since</p>
+                        <input type="text" name="biografia" id="" value= "<%=biografia%>" placeholder="Mi biografia">
+                    </div>
+                </div>
+                <!-- separador -->
+                <div class="separador">
+                    <hr class="h">
+                </div>
+                <!-- 1. -->
+                <div class="profile-icon-name">
+                    <i class="fa-solid fa-user"></i>
+                    <p>Names</p>
+                </div>
+                <div class="profile-names">
+                    <input type="text" name="nombre" id="" value="<%=nombre%>" placeholder="First name">
+                    <input type="text" name="paterno" id="" value="<%=paterno%>" placeholder="Last name">
+                    <input type="text" name="materno" id="" value="<%=materno%>" placeholder="Last name">
+                </div>
+                <!-- 2. -->
+                <div class="profile-icon-manage">
+                    <i class="fa-solid fa-lock"></i>
+                    <p>Account Managment</p>
+                </div>
+                <div class="profile-manage">
+                    <input type="text" name="email" id="" value="<%=email%>" placeholder="email@example.com">
+                    <input type="password" name="pass" id="" value="<%=pass%>" placeholder="Password">
+                </div>
+                <!-- 3. -->
+                <div class="profile-icon-birth">
+                    <i class="fa-solid fa-cake"></i>
+                    <p>Birthdate</p>
+
+                    <i class="fa-solid fa-user"></i>
+                    <p class="Member-since">Member Since</p>
+                </div>
+                <div class="profile-birth">
+                    <input type="date" name="" id="" value="<%=nacimiento%>" placeholder="Birthdate">
+                    <input type="date" name="" id="" value="<%=registro%>" placeholder="Member Since">
+                </div>
+                <!-- boton -->
+                <div class="profile-save-changes">
+                    <button type="submit" class="btn-save-changes"></i>Save Changes</button>
+                </div>
+                <!-- separador -->
+                <div class="separador-dos">
+                    <hr class="h2">
+                </div>
             </div>
-            <div class="profile-birth">
-                <input type="date" name="" id="" value="<%=nacimiento%>" placeholder="Birthdate">
-                <input type="date" name="" id="" value="<%=registro%>" placeholder="Member Since">
-            </div>
-            <!-- boton -->
-            <div class="profile-save-changes">
-                <button type="submit" class="btn-save-changes"></i>Save Changes</button>
-            </div>
-            <!-- separador -->
-            <div class="separador-dos">
-                <hr class="h2">
-            </div>
-        </div>
+        </form>
+        
     </div>
     <!-- Ventana PopUp para crear las tareas -->
     <div class="PopUp"> <!-- fondo -->
