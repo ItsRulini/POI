@@ -115,9 +115,11 @@
             <!-- barra para escribir -->
             <div class="bar-chat">
                 <div class="write-bar">
-                    <input type="text" name="" placeholder="What's on your mind?">
+                    <input type="text" name="barraMensaje" placeholder="What's on your mind?">
                     <button type="submit" class="btn-post-media"><i class="fa-solid fa-paperclip"></i></button>
                     <button type="submit" class="btn-post-location"><i class="fa-solid fa-location-dot"></i></button>
+                    
+                    <!--Botón para enviar el contenido de este mensaje-->
                     <button type="submit" class="btn-post"><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>

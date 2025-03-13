@@ -53,6 +53,12 @@
             <version>1.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.tomitribe.jkta</groupId>
+            <artifactId>jkta</artifactId>
+            <version>0.12</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
     

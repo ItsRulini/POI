@@ -71,3 +71,27 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+// Manejo de los mensajes en JavaScript
+
+const socket = new WebSocket("ws://localhost:8084/testPOI/chat");
+
+socket.onopen = () => console.log("Conectado al WebSocket");
+socket.onmessage = (event) => {
+    let chatWindow = document.querySelector(".window-chat");
+    let newBubble = document.createElement("div");
+    newBubble.classList.add("window-bubble-dos");
+    newBubble.innerHTML = `<textarea type="text" readonly>${event.data}</textarea>`;
+    chatWindow.appendChild(newBubble);
+};
+
+document.querySelector(".btn-post").addEventListener("click", function() {
+    console.log("Hola perrillo");
+    let input = document.querySelector("input[name='barraMensaje']");
+    let message = input.value.trim();
+
+    if (message !== "") {
+        socket.send(message);
+        input.value = "";
+    }
+});

@@ -1,3 +1,4 @@
+websockets\ChatWebSocket.class
 dao\usuarioDAO.class
 servlets\LoginServlet.class
 models\Chat.class
