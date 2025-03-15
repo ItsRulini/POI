@@ -197,14 +197,16 @@
     
     <!-- Ventana PopUp para crear chat -->
     <div class="PopUpChat"> <!-- fondo -->
-        <div class="modal-chat"> <!-- Ventana base -->
+        <form action="../InsertarChatServlet" method="POST" class="modal-chat"> <!-- Ventana base -->
             <div class="close-newchat">
                 <button class="close-chat"><i class="fa-solid fa-arrow-left"></i></button>
-                <p>New message</p>
+                <!--<p>New message</p>-->
+                <input type="text" name="nombreChat" placeholder="Chat name" required>
             </div>
             <div class="chat-to">
                 <p>To:</p>
             </div>
+            <div id="selected-users"></div> <!-- Aquí van los inputs ocultos -->
             <div class="separador-chat">
                 <hr class="h-chat">
             </div>
@@ -212,14 +214,14 @@
                 <%
                 for(Usuario item : usuarios) {
                 %>
-                <div class="new-convo">
-                    <img class="new-pfp" alt="ChiChat" src="logo.jpg">
+                <div class="new-convo" data-id="<%=item.getIdUsuario()%>">
+                    <img class="new-pfp" alt="ChiChat" src="<%=item.getAvatar()%>">
                     <p><%=item.getUsuario()%></p>
                 </div>
                 <%}%>
             </div>
-            <button class="start-btn">Start chatting</button>
-        </div>
+            <button type="submit" class="start-btn">Start chatting</button>
+        </form>
     </div>
     <!-- Ventana PopUp para eliminar chat -->
     <div class="PopUpDelete"> <!-- fondo -->

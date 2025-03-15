@@ -91,10 +91,10 @@ public class LoginServlet extends HttpServlet {
             tarea_usuarioDAO tareaUsuario = new tarea_usuarioDAO(conn.Conectar());
             
             Usuario user = uDao.buscarUsuario(usuario, contraseña);
-            List<Usuario> usuarios = uDao.getAllUsuarios();
             
             if (user != null) {
                 HashSet<Tarea_Usuario> tareas = tareaUsuario.getTareas(user.getIdUsuario());
+                List<Usuario> usuarios = uDao.getAllUsuarios(user.getIdUsuario());
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("idUsuario", user.getIdUsuario());

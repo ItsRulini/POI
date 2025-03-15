@@ -11,6 +11,8 @@ com\mycompany\testpoi\JakartaRestConfiguration.class
 servlets\LogOutServlet.class
 dao\tarea_usuarioDAO.class
 clases\Conexion.class
+dao\chatDAO.class
 models\Tarea.class
+servlets\InsertarChatServlet.class
 servlets\CambiosPerfilServlet.class
 models\Tarea_Usuario.class

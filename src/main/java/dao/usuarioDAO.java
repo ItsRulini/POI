@@ -194,7 +194,7 @@ public class usuarioDAO {
 
     }
 
-    public List<Usuario> getAllUsuarios() {
+    public List<Usuario> getAllUsuarios(int id) {
 
         List<Usuario> usuarios = new ArrayList<>();
         CallableStatement cs = null;
@@ -202,8 +202,9 @@ public class usuarioDAO {
 
         try {
             // Llamar al procedimiento almacenado (no olvides el nombre correcto de tu procedimiento)
-            String query = "{CALL spGetAllUsuarios()}";
+            String query = "{CALL spGetAllUsuarios(?)}";
             cs = conn.prepareCall(query);
+            cs.setInt(1, id);
 
             rs = cs.executeQuery();
 
@@ -211,6 +212,7 @@ public class usuarioDAO {
                 Usuario usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt("idUsuario"));
                 usuario.setUsuario(rs.getString("usuario"));
+                usuario.setAvatar(rs.getString("avatar"));
 
                 usuarios.add(usuario); // Ingresamos al usuario que nos trajimos a la lista
             }

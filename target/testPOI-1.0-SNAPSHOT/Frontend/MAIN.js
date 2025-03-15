@@ -47,7 +47,7 @@ container.addEventListener("wheel", (event) => {
 });
 
 //agregar botones de los usuarios con los q se crea un nuevo chat
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     const chatToContainer = document.querySelector(".chat-to");
     const userElements = document.querySelectorAll(".new-convo");
 
@@ -70,7 +70,88 @@ document.addEventListener("DOMContentLoaded", function () {
             chatToContainer.appendChild(button);
         });
     });
+});*/
+/*
+document.addEventListener("DOMContentLoaded", function () {
+    const chatToContainer = document.querySelector(".chat-to");
+    const userElements = document.querySelectorAll(".new-convo");
+
+    userElements.forEach(user => {
+        user.addEventListener("click", function () {
+            const username = this.dataset.username || this.querySelector("p").textContent.trim();
+
+            // Verifica si el usuario ya está en la lista seleccionada
+            if (chatToContainer.querySelector(`[data-username="${username}"]`)) {
+                return; // Evita duplicados
+            }
+
+            // Se oculta el usuario seleccionado
+            this.style.display = "none";
+
+            // Se crea el botón con el nombre del usuario seleccionado
+            const button = document.createElement("button");
+            button.setAttribute("data-username", username);
+            button.innerHTML = `${username} <i class="fa-solid fa-xmark"></i>`;
+
+            // Elimina el botón y vuelve a mostrar al usuario en la lista
+            button.addEventListener("click", function () {
+                button.remove(); // Elimina el botón
+                user.style.display = "flex"; // Muestra al usuario de nuevo
+            });
+
+            // Agregar el botón al contenedor de usuarios seleccionados
+            chatToContainer.appendChild(button);
+        });
+    });
+});*/
+
+document.addEventListener("DOMContentLoaded", function () {
+    const chatToContainer = document.querySelector(".chat-to");
+    const userElements = document.querySelectorAll(".new-convo");
+    const selectedUsersContainer = document.getElementById("selected-users");
+
+    userElements.forEach(user => {
+        user.addEventListener("click", function () {
+            const username = this.querySelector("p").textContent.trim();
+            const userId = this.dataset.id; // Obtiene el ID del usuario
+
+            // Verifica si el usuario ya está en la lista seleccionada
+            if (chatToContainer.querySelector(`[data-username="${username}"]`)) {
+                return; // Evita duplicados
+            }
+
+            // Se oculta el usuario seleccionado
+            this.style.display = "none";
+
+            // Se crea el botón con el nombre del usuario seleccionado
+            const button = document.createElement("button");
+            button.setAttribute("data-username", username);
+            button.innerHTML = `${username} <i class="fa-solid fa-xmark"></i>`;
+
+            // Se crea un input oculto con el ID del usuario
+            const hiddenInput = document.createElement("input");
+            hiddenInput.type = "hidden";
+            hiddenInput.name = "usuariosSeleccionados"; // Nombre del array en el request
+            hiddenInput.value = userId;
+            hiddenInput.setAttribute("data-id", userId);
+
+            // Elimina el botón y el input oculto cuando se hace clic en la 'x'
+            button.addEventListener("click", function () {
+                button.remove(); // Elimina el botón
+                user.style.display = "flex"; // Muestra al usuario de nuevo
+
+                // Elimina el input oculto correspondiente
+                selectedUsersContainer.querySelector(`[data-id="${userId}"]`).remove();
+            });
+
+            // Agregar el botón al contenedor de usuarios seleccionados
+            chatToContainer.appendChild(button);
+            selectedUsersContainer.appendChild(hiddenInput); // Agregar input oculto
+        });
+    });
 });
+
+
 
 // Manejo de los mensajes en JavaScript
 
@@ -86,7 +167,7 @@ socket.onmessage = (event) => {
 };
 
 document.querySelector(".btn-post").addEventListener("click", function() {
-    console.log("Hola perrillo");
+    //console.log("Hola perrillo");
     let input = document.querySelector("input[name='barraMensaje']");
     let message = input.value.trim();
 
