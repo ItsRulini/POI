@@ -7,9 +7,11 @@ package servlets;
 import clases.Conexion;
 import dao.usuarioDAO;
 import dao.tarea_usuarioDAO;
+import dao.chatDAO;
 
 import models.Usuario;
 import models.Tarea_Usuario;
+import models.Chat;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -89,12 +91,16 @@ public class LoginServlet extends HttpServlet {
             Conexion conn = new Conexion();
             usuarioDAO uDao = new usuarioDAO(conn.Conectar());
             tarea_usuarioDAO tareaUsuario = new tarea_usuarioDAO(conn.Conectar());
+            chatDAO cDao = new chatDAO(conn.Conectar());
             
             Usuario user = uDao.buscarUsuario(usuario, contraseña);
             
             if (user != null) {
-                HashSet<Tarea_Usuario> tareas = tareaUsuario.getTareas(user.getIdUsuario());
-                List<Usuario> usuarios = uDao.getAllUsuarios(user.getIdUsuario());
+                int idUsuario = user.getIdUsuario();
+                
+                HashSet<Tarea_Usuario> tareas = tareaUsuario.getTareas(idUsuario);
+                List<Usuario> usuarios = uDao.getAllUsuarios(idUsuario);
+                HashSet<Chat> chats = cDao.getChatsUsuario(idUsuario);
                 
                 HttpSession session = request.getSession();
                 session.setAttribute("idUsuario", user.getIdUsuario());
@@ -109,8 +115,9 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("Contraseña", user.getContraseña());
                 session.setAttribute("Avatar", user.getAvatar());
                 
-                session.setAttribute("Lista", usuarios); // Lista de usuarios disponibles
+                session.setAttribute("ListaUsuarios", usuarios); // Lista de usuarios disponibles
                 session.setAttribute("ListaTareas", tareas); // Lista de tareas del usuario que se logeó
+                session.setAttribute("ListaChats", chats); // Lista de chats a los que pertenece el usuario actual
 
                 //Metodo para redireccionar a otra vista/Servlet
                 response.sendRedirect("Frontend/MAIN.jsp");

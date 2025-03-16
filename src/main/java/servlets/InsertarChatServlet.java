@@ -79,45 +79,47 @@ public class InsertarChatServlet extends HttpServlet {
         String[] usuariosSeleccionados = request.getParameterValues("usuariosSeleccionados");
         int idUsuario = (int) request.getSession().getAttribute("idUsuario");
         Boolean chatIndividual = null;
-        
+
         if (usuariosSeleccionados != null && usuariosSeleccionados.length > 0) {
-            
-            if(usuariosSeleccionados.length == 1){ // Solamente se seleccionó a un usuario
+
+            if (usuariosSeleccionados.length == 1) { // Solamente se seleccionó a un usuario
                 chatIndividual = true;
-                
-            }else{
+
+            } else {
                 chatIndividual = false;
             }
-            
+
             for (String userId : usuariosSeleccionados) {
                 System.out.println("Usuario seleccionado: " + userId);
             }
         }
-        
-        try{
+
+        try {
             Conexion conn = new Conexion();
             chatDAO chdao = new chatDAO(conn.Conectar());
-            
-            if(chatIndividual == null){
+
+            if (chatIndividual == null) {
                 System.out.println("error, no se seleccionó ningún usuario");
                 return; // Hay error
             }
-            
-            if(chatIndividual == true){
+
+            if (chatIndividual == true) {
                 int idUsuario2 = Integer.parseInt(usuariosSeleccionados[0]); // id del segundo usuario
-                
+
                 boolean insert = chdao.insertChatPrivado(idUsuario, idUsuario2, nombreChat);
-                
-                if(insert == false){
+
+                if (insert == false) {
                     System.out.println("error, no se creo el chat");
                 }
-                
-            }else{ // chat grupal
-                
+
+                //Metodo para redireccionar a otra vista/Servlet
+                response.sendRedirect("Frontend/MAIN.jsp");
+
+            } else { // chat grupal
+
             }
-            
-            
-        }catch (Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             response.setContentType("application/json");
             response.getWriter().write("{\"status\": \"error\", \"message\": \"" + e.getMessage() + "\"}");
