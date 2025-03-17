@@ -84,7 +84,7 @@
                             <img class="Pic" alt="ChiChat" src="logo.jpg">
                         </div>
                         
-                        <div class="user-convo">
+                        <div id="<%=item.getIdChat()%>" class="user-convo">
                             <p class="username"><%=item.getNombre()%></p>
                             <p class="conversation">Mi primera conversacion</p>
                         </div>
