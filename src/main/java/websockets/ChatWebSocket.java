@@ -16,14 +16,32 @@ public class ChatWebSocket {
 
     @OnOpen
     public void onOpen(Session session) {
-        String query = session.getRequestURI().toString(); // Obtiene la URL completa
-        String chatId = query.substring(query.lastIndexOf("/") + 1); // Extrae el chatId
+        //String uri = session.getRequestURI().toString();  // Obtener la URL completa
+        String path = session.getRequestURI().getPath();  // Obtener solo el path de la URL
+
+        // El chatId está inmediatamente después de "/chat/"
+        String chatId = path.substring(path.lastIndexOf("/") + 1);
+
+        String query = session.getRequestURI().getQuery(); // Obtener parámetros de la URL
+        String userId = null;
+
+        if (query != null && query.contains("userId=")) {
+            userId = query.split("userId=")[1]; // Extraer userId del query string
+        }
+
+        if (chatId != null) {
+            session.getUserProperties().put("chatId", chatId);
+        }
+        if (userId != null) {
+            session.getUserProperties().put("userId", userId);
+        }
 
         chatSessions.computeIfAbsent(chatId, k -> new CopyOnWriteArraySet<>()).add(session);
-        System.out.println("Nueva conexión: " + session.getId() + " para el chat: " + chatId);
+        System.out.println("Usuario " + userId + " conectado al chat " + chatId);
     }
 
-    @OnMessage
+
+    /*@OnMessage
     public void onMessage(String message, Session session) {
         String query = session.getRequestURI().toString(); // Obtiene la URL completa
         String chatId = query.substring(query.lastIndexOf("/") + 1); // Extrae el chatId
@@ -32,6 +50,21 @@ public class ChatWebSocket {
             broadcast(message, chatId);
         } else {
             System.out.println("Error: No se pudo obtener el chatId.");
+        }
+    }*/
+    
+    @OnMessage
+    public void onMessage(String message, Session session) {
+        String chatId = (String) session.getUserProperties().get("chatId");
+        String senderId = (String) session.getUserProperties().get("userId");
+
+        if (chatId != null && senderId != null) {
+            // Crear un objeto JSON
+            String fullMessage = "{\"senderId\": \"" + senderId + "\", \"message\": \"" + message + "\"}";
+            System.out.println("Mensaje recibido en el chat " + chatId + ": " + message);
+            broadcast(fullMessage, chatId);
+        } else {
+            System.out.println("Error: No se pudo obtener chatId o userId.");
         }
     }
 

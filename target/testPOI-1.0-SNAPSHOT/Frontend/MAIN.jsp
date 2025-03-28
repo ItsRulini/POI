@@ -43,6 +43,8 @@
             String avatar = request.getSession().getAttribute("Avatar") == null ? "" : request.getSession().getAttribute("Avatar").toString();
         %>
 
+        <meta name="user-id" content="<%= session.getAttribute("idUsuario") %>">
+
 
         <div class="container-interface">
             <!-- aqui se muestra el icono del usuario

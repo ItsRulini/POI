@@ -118,27 +118,55 @@ chatElements.forEach(chatElement => {
     chatElement.addEventListener("click", function () {
         const chatId = this.id;
         console.log("Chat seleccionado:", chatId);
-        openWebSocket(chatId);
+        const userId = document.querySelector("meta[name='user-id']").getAttribute("content");
+        console.log("User ID:", userId);
+        openWebSocket(chatId, userId);
     });
 });
 
 // Función para abrir el WebSocket
-function openWebSocket(chatId) {
+function openWebSocket(chatId, userId) {
     if (socket) {
         socket.close(); // Cierra el WebSocket anterior si existe
     }
 
-    socket = new WebSocket(`ws://192.168.1.102:8084/testPOI/chat/${chatId}`);
-
+    socket = new WebSocket(`ws://192.168.1.102:8084/testPOI/chat/${chatId}?userId=${userId}`);
     socket.onopen = () => console.log("Conectado al WebSocket para el chat:", chatId);
 
+    /*
+     socket.onmessage = (event) => {
+     let chatWindow = document.querySelector(".window-chat");
+     let newBubble = document.createElement("div");
+     newBubble.classList.add("window-bubble-dos");
+     newBubble.innerHTML = `<textarea type="text" readonly>${event.data}</textarea>`;
+     chatWindow.appendChild(newBubble);
+     };*/
+
+
     socket.onmessage = (event) => {
-        let chatWindow = document.querySelector(".window-chat");
-        let newBubble = document.createElement("div");
-        newBubble.classList.add("window-bubble-dos");
-        newBubble.innerHTML = `<textarea type="text" readonly>${event.data}</textarea>`;
-        chatWindow.appendChild(newBubble);
+        console.log("Mensaje recibido:"); // Ver el mensaje recibido
+        try {
+            let chatWindow = document.querySelector(".window-chat");
+            let data = JSON.parse(event.data); // Convertimos el mensaje JSON a objeto
+            let newBubble = document.createElement("div");
+
+            console.log("Datos procesados:", data); // Ver los datos procesados
+
+            if (data.senderId === userId) {
+                newBubble.classList.add("window-bubble-dos"); // Mensajes del usuario actual (derecha)
+                console.log("este usuario");
+            } else {
+                newBubble.classList.add("window-bubble"); // Mensajes de otros usuarios (izquierda)
+                console.log("otro usuario");
+            }
+            console.log("despues");
+            newBubble.innerHTML = `<textarea type="text" readonly>${data.message}</textarea>`;
+            chatWindow.appendChild(newBubble);
+        } catch (e) {
+            console.error("Error al procesar el mensaje:", e);  // Si hay un error en el parseo, lo mostramos
+        }
     };
+
 
     socket.onerror = (error) => console.error("Error en WebSocket:", error);
     socket.onclose = () => console.log("WebSocket cerrado.");
@@ -147,8 +175,10 @@ function openWebSocket(chatId) {
 document.querySelector(".btn-post").addEventListener("click", function () {
     let input = document.querySelector("input[name='barraMensaje']");
     let message = input.value.trim();
+    //const userId = document.querySelector("meta[name='user-id']").getAttribute("content");
 
     if (message !== "" && socket && socket.readyState === WebSocket.OPEN) {
+        //socket.send(JSON.stringify({ senderId: userId, message: message }));
         socket.send(message);
         input.value = "";
     } else {
