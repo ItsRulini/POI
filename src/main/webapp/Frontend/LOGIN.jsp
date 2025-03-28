@@ -21,7 +21,7 @@
                     <h2>LOGIN</h2>
                     <p class="text">Start chating</p>
                     <div class="content">
-                        <form id="Main" action="../LoginServlet" method="post">
+                        <form id="Main" action="../LoginServlet" method="POST">
                             <input type="text" name="user" placeholder="Username" required autofocus="">
                             <input type="password" name="pwrd" placeholder="Password" required autofocus="">
                             <button class="btn" type="submit">Log In</button>

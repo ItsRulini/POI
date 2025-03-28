@@ -128,7 +128,7 @@ function openWebSocket(chatId) {
         socket.close(); // Cierra el WebSocket anterior si existe
     }
 
-    socket = new WebSocket(`ws://localhost:8084/testPOI/chat/${chatId}`);
+    socket = new WebSocket(`ws://192.168.1.102:8084/testPOI/chat/${chatId}`);
 
     socket.onopen = () => console.log("Conectado al WebSocket para el chat:", chatId);
 
